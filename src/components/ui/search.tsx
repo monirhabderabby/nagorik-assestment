@@ -1,31 +1,26 @@
 "use client";
+
+// Packages
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Search } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+
+// Local imports
+import { SearchTermSchema, SearchTermType } from "@/schemas";
 import { Input } from "./input";
 
-// Define a Zod schema
-const searchSchema = z.object({
-  searchTerm: z
-    .string()
-    .min(1, "Search term is required")
-    .max(100, "Search term cannot exceed 100 characters"),
-});
-
-type SearchFormInputs = z.infer<typeof searchSchema>;
-
 const SearchField = () => {
+  // react-hook-form
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SearchFormInputs>({
-    resolver: zodResolver(searchSchema),
+  } = useForm<SearchTermType>({
+    resolver: zodResolver(SearchTermSchema),
   });
 
   // handle form submit
-  const onSubmit = (data: SearchFormInputs) => {
+  const onSubmit = (data: SearchTermType) => {
     console.log("Search data:", data);
   };
 
