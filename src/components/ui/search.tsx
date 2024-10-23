@@ -32,7 +32,7 @@ const SearchField = () => {
       >
         <div className="max-w-[500px]">
           <Input
-            className="text-black text-[18px] w-[500px]"
+            className="text-black text-[18px] w-auto md:w-[500px]"
             placeholder="Search for a movie, tv show, person..."
             {...register("searchTerm")}
           />
