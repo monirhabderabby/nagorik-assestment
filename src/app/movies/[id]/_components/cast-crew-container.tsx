@@ -62,7 +62,7 @@ const CastCrewContainer = ({ movieId }: Props) => {
   // If data is successfully fetched, display the cast cards.
   else if (data) {
     castContent = (
-      <div className="pt-3 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-12 w-full">
+      <div className="pt-3 flex flex-wrap gap-6 w-full">
         {data.cast.slice(0, 6).map((cast: castSchemaType) => (
           <CastCrewCard key={cast.id} data={cast} />
         ))}
@@ -72,7 +72,7 @@ const CastCrewContainer = ({ movieId }: Props) => {
 
   // Main component return with cast name and the profile (loading, error, or data).
   return (
-    <div className="mt-[50px] space-y-10 container">
+    <div className="mt-[20px] space-y-10 container">
       <div>
         <div className="w-full flex justify-between">
           <h1 className="text-black text-[30px] font-bold pb-6">Cast</h1>

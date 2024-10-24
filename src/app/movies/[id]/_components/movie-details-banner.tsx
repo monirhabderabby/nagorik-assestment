@@ -16,10 +16,10 @@ const MovieDetailsBanner = ({ movie }: Props) => {
   return (
     <section
       style={{ backgroundImage: "url(/harry-poter.jpg)" }}
-      className="h-[80vh] bg-no-repeat bg-cover  mix-blend-darken relative"
+      className="h-auto py-[30px] md:h-[80vh] bg-no-repeat bg-cover  mix-blend-darken relative"
     >
       <div className="bg-black/70 absolute top-0 right-0 w-full h-full -z-20" />
-      <div className="flex items-center h-full container z-50 gap-x-8">
+      <div className="flex flex-col md:flex-row items-center h-full container z-50 gap-x-8">
         <Poster
           src={movie.poster_path!}
           alt={movie.original_title}

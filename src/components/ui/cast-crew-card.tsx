@@ -14,8 +14,8 @@ const CastCrewCard = ({ data }: castProps) => {
   const profile = fullImageSrc(data.profile_path!);
 
   return (
-    <div className="w-[175px] h-auto shadow-md rounded-[8px] ">
-      <div className="w-full h-[215px] rounded-[8px] relative">
+    <div className="w-[150px] md:w-[175px] h-auto shadow-md rounded-[8px] ">
+      <div className="w-full h-[160px] md:h-[215px] rounded-[8px] relative">
         <Image
           src={profile}
           fill
@@ -26,8 +26,10 @@ const CastCrewCard = ({ data }: castProps) => {
         />
       </div>
       <div className="pl-3 pb-2">
-        <h1 className="text-[20px] text-start pt-4 leading-3">{data.name}</h1>
-        <p className="text-gray-700 text-start text-[17px]">
+        <h1 className="text-[18px] md:text-[20px] text-start pt-4 leading-3">
+          {data.name}
+        </h1>
+        <p className="text-gray-700 text-start text-[14px] md:text-[17px] pt-1 text-balance">
           as {data.character}
         </p>
       </div>
