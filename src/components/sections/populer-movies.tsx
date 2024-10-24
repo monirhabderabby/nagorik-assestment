@@ -1,7 +1,7 @@
 "use client";
 // Packages
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { AlertCircleIcon, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 // Local imports
 import {
@@ -9,6 +9,7 @@ import {
   populerMoviesResponseSchema,
   populerMoviesResponseSchemaType,
 } from "@/schemas/movie.schema";
+import ResponseError from "../ui/error";
 import MovieCard from "../ui/movie-card";
 import SkeletonWrapper from "../ui/skeleton-wrapper";
 
@@ -48,12 +49,11 @@ const PopulerMovies = () => {
     initialPageParam: 1,
   });
 
-  // Content rendering based on loading, error, or fetched data
-
+  // Variable to hold the JSX for the cast content (loading, error, or actual data).
   let content;
 
+  // If data is still loading, show a skeleton loader
   if (isLoading) {
-    // loading state
     content = (
       <div className="container grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 mt-10">
         {Array.from({ length: 10 }).map((_, index) => (
@@ -63,16 +63,13 @@ const PopulerMovies = () => {
         ))}
       </div>
     );
-  } else if (isError) {
-    // Error state
-    content = (
-      <div className="mt-10 h-[200px] flex justify-center items-center text-red-500 text-[18px] flex-col gap-y-2">
-        <AlertCircleIcon />
-        {error?.message || "Something went wrong"}
-      </div>
-    );
-  } else if (response?.pages) {
-    // data renderaing state
+  }
+  // If there is an error, display an error message.
+  else if (isError) {
+    content = <ResponseError message={error.message} />;
+  }
+  // If data is successfully fetched, display the movie cards.
+  else if (response?.pages) {
     content = (
       <>
         {response?.pages?.map((p) => (

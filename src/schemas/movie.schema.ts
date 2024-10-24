@@ -86,3 +86,49 @@ export const movieDetailsSchema = z.object({
 });
 
 export type movieDetailsSchemaType = z.infer<typeof movieDetailsSchema>;
+
+// Cast
+export const castSchema = z.object({
+  adult: z.boolean(),
+  gender: z.number().int().min(0),
+  id: z.number().int(),
+  known_for_department: z.string(),
+  name: z.string(),
+  original_name: z.string(),
+  popularity: z.number(),
+  profile_path: z.string().nullable(),
+  cast_id: z.number().int(),
+  character: z.string(),
+  credit_id: z.string(),
+  order: z.number().int(),
+});
+
+export type castSchemaType = z.infer<typeof castSchema>;
+
+export const crewSchema = z.object({
+  adult: z.boolean(),
+  gender: z.number().int().min(0),
+  id: z.number().int(),
+  known_for_department: z.string(),
+  name: z.string(),
+  original_name: z.string(),
+  popularity: z.number(),
+  profile_path: z.string().nullable(),
+  credit_id: z.string(),
+  department: z.string(),
+  job: z.string(),
+});
+
+export type crewSchemaType = z.infer<typeof crewSchema>;
+
+// Combine cast and crew schemas into a new schema
+export const castAndCrewCombinedSchema = z.object({
+  cast: z.array(castSchema),
+  crew: z.array(crewSchema),
+});
+
+export type castAndCrewResponseType = {
+  cast: castSchemaType[];
+  crew: crewSchemaType[];
+  id: number;
+};
