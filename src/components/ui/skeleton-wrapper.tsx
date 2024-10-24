@@ -17,7 +17,12 @@ const SkeletonWrapper = ({
 }: Props) => {
   if (!isLoading) return children;
   return (
-    <Skeleton className={cn(fullWidth && "w-full rounded-12px", className)}>
+    <Skeleton
+      className={cn(
+        fullWidth && "w-full bg-gray-400/20 rounded-12px",
+        className
+      )}
+    >
       <div className="opacity-0">{children}</div>
     </Skeleton>
   );
