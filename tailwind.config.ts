@@ -22,6 +22,8 @@ const config: Config = {
       fontFamily: {
         pacifico: ["Pacifico", "cursive"],
         courgette: ["Courgette", "cursive"],
+        poppins: ["var(--font-poppins)"],
+        inter: ["var(--font-inter)"],
       },
     },
   },

@@ -12,7 +12,7 @@ interface Props {
 const MovieDetailsSidebar = ({ movie }: Props) => {
   return (
     <>
-      <div className="w-[400px] h-auto bg-white border-t md:border-l mt-[50px] pt-[20px]">
+      <div className="w-[400px] h-auto bg-white border-t md:border-t-0 border-l-0 md:border-l mt-[50px] pt-[20px]">
         <div className="pl-4 space-y-8">
           {movie.homepage && (
             <a
@@ -57,9 +57,11 @@ interface InfoProps {
 }
 const Info = ({ title, value }: InfoProps) => {
   return (
-    <div className="text-[18px]">
+    <div className="text-[16px]">
       <p className="font-semibold">{title}</p>
-      <p>{value ? value : "-"}</p>
+      <p className="text-gray-700 font-inter text-[15px]">
+        {value ? value : "-"}
+      </p>
     </div>
   );
 };

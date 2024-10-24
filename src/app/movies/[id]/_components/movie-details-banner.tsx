@@ -29,12 +29,7 @@ const MovieDetailsBanner = ({ movie }: Props) => {
         <div className="text-white space-y-4">
           <MovieInfo title={movie.original_title} genres={genres} />
           <BannerActions />
-          <BannerOverview
-            tagline={movie.tagline!}
-            overview={movie.overview}
-            release_date={movie.release_date!}
-            status={movie.status}
-          />
+          <BannerOverview tagline={movie.tagline!} overview={movie.overview} />
         </div>
       </div>
     </section>
@@ -85,25 +80,15 @@ const BannerActions = () => (
 interface BannerOverviewProps {
   tagline: string;
   overview: string;
-  status: string;
-  release_date: string;
 }
 
-const BannerOverview = ({
-  tagline,
-  overview,
-  status,
-  release_date,
-}: BannerOverviewProps) => {
+const BannerOverview = ({ tagline, overview }: BannerOverviewProps) => {
   return (
     <div className="pt-5">
       <p className="text-white tracking-wide font-bold">{tagline}</p>
-      <p className="text-white/80 max-w-[600px] tracking-wider">{overview}</p>
-      {status && release_date && (
-        <p className="mt-3">
-          {status} {release_date}
-        </p>
-      )}
+      <p className="pt-2 text-white/70 max-w-[600px] text-[15px] font-inter tracking-wider">
+        {overview}
+      </p>
     </div>
   );
 };

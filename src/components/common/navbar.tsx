@@ -12,6 +12,12 @@ const Navbar = () => {
           TMDB
         </Link>
         <div className="flex items-center gap-x-3">
+          <Link
+            href="/watchlist"
+            className="text-white/70 hover:text-white/90 cursor-pointer transition-colors duration-300"
+          >
+            Watchlist
+          </Link>
           <User className="text-white/70 hover:text-white/90 cursor-pointer transition-colors duration-300" />
           <Link href="/wishlist">
             <Heart className="text-white/70 hover:text-white/90 cursor-pointer transition-colors duration-300" />

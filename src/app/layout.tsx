@@ -1,13 +1,22 @@
 import Navbar from "@/components/common/navbar";
+import NProgress from "@/provider/NProgress";
 import NextQueryClientProvider from "@/provider/query-client-provider";
 import type { Metadata } from "next";
-import { PT_Sans_Narrow } from "next/font/google";
+import { CookiesProvider } from "next-client-cookies/server";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
-const narrow = PT_Sans_Narrow({
-  weight: ["400", "700"],
+// Fonts
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-narrow",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -22,11 +31,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${narrow.className} antialiased pb-[500px]`}>
-        <NextQueryClientProvider>
-          <Navbar />
-          {children}
-        </NextQueryClientProvider>
+      <body
+        className={`${inter.className} ${poppins.className} antialiased pb-[500px]`}
+      >
+        <CookiesProvider>
+          <NextQueryClientProvider>
+            <NProgress />
+            <Navbar />
+            {children}
+          </NextQueryClientProvider>
+        </CookiesProvider>
       </body>
     </html>
   );
