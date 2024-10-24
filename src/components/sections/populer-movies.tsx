@@ -75,7 +75,7 @@ const PopulerMovies = () => {
         {response?.pages?.map((p) => (
           <div
             key={p.page}
-            className="container grid grid-cols-1 md:grid-cols-4  mt-10 gap-y-8"
+            className="container flex flex-wrap gap-4  mt-10 gap-y-8"
           >
             {p.results.map((movie: movieCardSchemaType) => (
               <MovieCard key={movie.id} movie={movie} />
