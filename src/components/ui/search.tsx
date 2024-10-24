@@ -6,11 +6,11 @@ import { Search } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 // Local imports
-import { SearchTermSchema, SearchTermType } from "@/schemas";
+import { SearchTermSchema, SearchTermType } from "@/schemas/search.schema";
 import { Input } from "./input";
 
 const SearchField = () => {
-  // react-hook-form
+  // react-hook-forms
   const {
     register,
     handleSubmit,

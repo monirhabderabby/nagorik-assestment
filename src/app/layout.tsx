@@ -1,6 +1,5 @@
 import Navbar from "@/components/common/navbar";
 import NextQueryClientProvider from "@/provider/query-client-provider";
-import { QueryClient } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { PT_Sans_Narrow } from "next/font/google";
 import "./globals.css";
@@ -21,10 +20,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient();
   return (
     <html lang="en">
-      <body className={`${narrow.className} antialiased `}>
+      <body className={`${narrow.className} antialiased pb-[500px]`}>
         <NextQueryClientProvider>
           <Navbar />
           {children}
