@@ -3,7 +3,7 @@ import { Heart, Play, ShoppingCart } from "lucide-react";
 
 // Local imports
 import Poster from "@/components/ui/poster";
-import { getGenreNames } from "@/lib/utils";
+import { fullImageSrc, getGenreNames } from "@/lib/utils";
 import { movieDetailsSchemaType } from "@/schemas/movie.schema";
 
 interface Props {
@@ -13,9 +13,10 @@ interface Props {
 const MovieDetailsBanner = ({ movie }: Props) => {
   // here are the genres
   const genres = getGenreNames(movie.genres);
+  const bannerSrc = fullImageSrc(movie.poster_path!);
   return (
     <section
-      style={{ backgroundImage: "url(/harry-poter.jpg)" }}
+      style={{ backgroundImage: `url(${bannerSrc})` }}
       className="h-auto py-[30px] md:h-[80vh] bg-no-repeat bg-cover  mix-blend-darken relative"
     >
       <div className="bg-black/70 absolute top-0 right-0 w-full h-full -z-20" />

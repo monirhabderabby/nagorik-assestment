@@ -46,5 +46,25 @@ export default async function Page({ params }: { params: { id: string } }) {
       return parsedMovieDetails.data;
     });
 
-  return <MovieDetailsContainer movie={movie} />;
+  // Fetch movie recommendations
+  const recommendations = await fetch(
+    `https://api.themoviedb.org/3/movie/${
+      params.id
+    }/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY!}`
+  )
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(
+          `Failed to fetch recommendations, status ${res.status}`
+        );
+      }
+      return res.json();
+    })
+    .then((response) => {
+      return response.results as movieCardSchemaType[];
+    });
+
+  return (
+    <MovieDetailsContainer movie={movie} recomendations={recommendations} />
+  );
 }
