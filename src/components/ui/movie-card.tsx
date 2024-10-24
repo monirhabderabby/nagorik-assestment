@@ -1,26 +1,24 @@
 // Packages
 import { Heart, ShoppingCart } from "lucide-react";
-import Image from "next/image";
 
 // Local imports
-import { blurDataUrl } from "@/lib/blurDataUrl";
-import { fullImageSrc } from "@/lib/utils";
 import { movieCardSchemaType } from "@/schemas/movie.schema";
+import Link from "next/link";
+import Poster from "./poster";
 
 const MovieCard = ({ movie }: { movie: movieCardSchemaType }) => {
   if (!movie) return;
-  const poster = fullImageSrc(movie.poster_path!);
   return (
-    <div className="w-[260px] h-auto cursor-pointer mx-auto">
+    <Link
+      href={`/movies/${movie.id}`}
+      className="w-[260px] h-auto cursor-pointer mx-auto"
+    >
       <div className="relative w-full h-[330px] overflow-hidden rounded-[4px]">
-        <Image
-          src={poster}
-          alt="image"
-          fill
-          className="w-[220px] h-full hover:scale-105 transition-all duration-300 rounded-[4px]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          placeholder="blur"
-          blurDataURL={blurDataUrl}
+        <Poster
+          src={movie.poster_path!}
+          alt={movie.original_title}
+          containerClass="w-[220px] h-[330px]"
+          className="rounded-[4px] hover:scale-110 transition-transform duration-300"
         />
         <div
           className="absolute text-orange-600 right-3 top-3"
@@ -40,7 +38,7 @@ const MovieCard = ({ movie }: { movie: movieCardSchemaType }) => {
           <ShoppingCart className="h-5 w-5 hover:text-orange-500 transition-colors duration-300" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
