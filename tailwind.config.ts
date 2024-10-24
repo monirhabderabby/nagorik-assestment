@@ -8,9 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: "1rem",
+        screens: {
+          "2xl": "1400px",
+        },
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      fontFamily: {
+        pacifico: ["Pacifico", "cursive"],
+        courgette: ["Courgette", "cursive"],
       },
     },
   },

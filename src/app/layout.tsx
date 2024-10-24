@@ -1,18 +1,13 @@
+import Navbar from "@/components/common/navbar";
 import NextQueryClientProvider from "@/provider/query-client-provider";
-import { QueryClient } from "@tanstack/react-query";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { PT_Sans_Narrow } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const narrow = PT_Sans_Narrow({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-narrow",
 });
 
 export const metadata: Metadata = {
@@ -25,13 +20,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient();
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <NextQueryClientProvider>{children}</NextQueryClientProvider>
+      <body className={`${narrow.className} antialiased pb-[500px]`}>
+        <NextQueryClientProvider>
+          <Navbar />
+          {children}
+        </NextQueryClientProvider>
       </body>
     </html>
   );
