@@ -132,3 +132,23 @@ export type castAndCrewResponseType = {
   crew: crewSchemaType[];
   id: number;
 };
+
+export const watchListAndFavouriteSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  banner_path: z.string().nullable(),
+  release_date: z.string().nullable(),
+  overview: z.string(),
+  favourite: z.boolean().optional(),
+  watchList: z.boolean().optional(),
+});
+
+export type watchListAndFavouriteType = {
+  id: number;
+  title: string;
+  banner_path: string | null;
+  release_date: string | null;
+  overview: string;
+  favourite?: boolean;
+  watchList?: boolean;
+};

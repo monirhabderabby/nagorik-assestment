@@ -26,10 +26,8 @@ const CastCrewCard = ({ data }: castProps) => {
         />
       </div>
       <div className="pl-3 pb-2">
-        <h1 className="text-[18px] md:text-[20px] text-start pt-4 leading-3">
-          {data.name}
-        </h1>
-        <p className="text-gray-700 text-start text-[14px] md:text-[17px] pt-1 text-balance">
+        <h1 className="text-[16px] text-start pt-4 leading-3">{data.name}</h1>
+        <p className="text-gray-700 text-start text-[14px]  pt-1 text-balance">
           as {data.character}
         </p>
       </div>

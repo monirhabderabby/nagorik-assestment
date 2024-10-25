@@ -1,10 +1,10 @@
 // Packages
-import { Heart, Play, ShoppingCart } from "lucide-react";
 
 // Local imports
 import Poster from "@/components/ui/poster";
 import { fullImageSrc, getGenreNames } from "@/lib/utils";
 import { movieDetailsSchemaType } from "@/schemas/movie.schema";
+import BannerActions from "./banner-action";
 
 interface Props {
   movie: movieDetailsSchemaType;
@@ -28,13 +28,8 @@ const MovieDetailsBanner = ({ movie }: Props) => {
         />
         <div className="text-white space-y-4">
           <MovieInfo title={movie.original_title} genres={genres} />
-          <BannerActions />
-          <BannerOverview
-            tagline={movie.tagline!}
-            overview={movie.overview}
-            release_date={movie.release_date!}
-            status={movie.status}
-          />
+          <BannerActions movie={movie} />
+          <BannerOverview tagline={movie.tagline!} overview={movie.overview} />
         </div>
       </div>
     </section>
@@ -60,50 +55,20 @@ const MovieInfo = ({ title, genres }: MovieInfoProps) => {
 
 // Banner Actions Components
 
-const BannerActions = () => (
-  <div className="flex items-center gap-x-4">
-    <button className="px-5 py-2 h-10 bg-white/20 hover:bg-white/40 transition-colors duration-300 flex items-center gap-x-2 rounded-md">
-      <Play className="h-5 w-5" /> Play
-    </button>
-    <button
-      title="Add to Wishlist"
-      className=" bg-white/20 h-10 w-10 hover:bg-white/40 transition-colors duration-300 gap-x-2 rounded-full flex justify-center items-center"
-    >
-      <Heart className="h-5 w-5" />
-    </button>
-    <button
-      title="Add to Cart"
-      className=" bg-white/20 h-10 w-10 hover:bg-white/40 transition-colors duration-300 gap-x-2 rounded-full flex justify-center items-center"
-    >
-      <ShoppingCart className="h-5 w-5" />
-    </button>
-  </div>
-);
-
 // Banner Overview
 
 interface BannerOverviewProps {
   tagline: string;
   overview: string;
-  status: string;
-  release_date: string;
 }
 
-const BannerOverview = ({
-  tagline,
-  overview,
-  status,
-  release_date,
-}: BannerOverviewProps) => {
+const BannerOverview = ({ tagline, overview }: BannerOverviewProps) => {
   return (
     <div className="pt-5">
       <p className="text-white tracking-wide font-bold">{tagline}</p>
-      <p className="text-white/80 max-w-[600px] tracking-wider">{overview}</p>
-      {status && release_date && (
-        <p className="mt-3">
-          {status} {release_date}
-        </p>
-      )}
+      <p className="pt-2 text-white/70 max-w-[600px] text-[15px] font-inter tracking-wider">
+        {overview}
+      </p>
     </div>
   );
 };
