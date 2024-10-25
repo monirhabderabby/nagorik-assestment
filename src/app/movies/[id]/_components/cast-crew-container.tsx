@@ -49,7 +49,7 @@ const CastCrewContainer = ({ movieId }: Props) => {
       <div className="pt-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {[1, 2, 3, 4, 5].map((n) => (
           <SkeletonWrapper isLoading={isLoading} key={n}>
-            <div className="w-[175px] h-[275px]">fsdf</div>
+            <div className="w-[175px] h-[275px]"></div>
           </SkeletonWrapper>
         ))}
       </div>
@@ -75,7 +75,7 @@ const CastCrewContainer = ({ movieId }: Props) => {
     <div className="mt-[20px] space-y-10 container">
       <div>
         <div className="w-full flex justify-between">
-          <h1 className="text-black text-[30px] font-bold pb-6">Cast</h1>
+          <h1 className=" text-[30px] font-bold pb-6">Cast</h1>
           <button className="hover:underline w-fit">View all</button>
         </div>
         {castContent}

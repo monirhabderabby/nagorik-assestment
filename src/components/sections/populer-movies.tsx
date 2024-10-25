@@ -92,7 +92,7 @@ const PopulerMovies = () => {
       <div className="mt-10 w-full flex justify-center">
         {hasNextPage && (
           <button
-            className="flex items-center rounded-full border border-gray-300 bg-secondary-50 px-3 py-2 text-sm font-medium text-black hover:bg-gray-100"
+            className="flex items-center rounded-full border border-gray-200 bg-secondary-50 px-3 py-2 text-sm font-medium dark:hover:bg-white/5 hover:bg-gray-100"
             type="button"
             onClick={(e) => {
               e.preventDefault();
@@ -103,7 +103,7 @@ const PopulerMovies = () => {
           >
             {isFetchingNextPage ? (
               <>
-                <Loader2 className="animate-spin h-4 w-4 text-black" />
+                <Loader2 className="animate-spin h-4 w-4 " />
               </>
             ) : (
               "Load More"
