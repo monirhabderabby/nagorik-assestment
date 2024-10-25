@@ -2,8 +2,7 @@
 import { Link } from "lucide-react";
 
 // Local imports
-import { movieDetailsSchemaType } from "@/schemas/movie.schema";
-import { genre } from "@/types";
+import { genre, movieDetailsSchemaType } from "@/types";
 
 interface Props {
   movie: movieDetailsSchemaType;

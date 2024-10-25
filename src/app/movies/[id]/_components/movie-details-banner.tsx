@@ -3,7 +3,7 @@
 // Local imports
 import Poster from "@/components/ui/poster";
 import { fullImageSrc, getGenreNames } from "@/lib/utils";
-import { movieDetailsSchemaType } from "@/schemas/movie.schema";
+import { movieDetailsSchemaType } from "@/types";
 import BannerActions from "./banner-action";
 
 interface Props {

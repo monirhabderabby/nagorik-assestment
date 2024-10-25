@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 // Local imports
-import { movieCardSchemaType } from "@/schemas/movie.schema";
+import { movieCardSchemaType } from "@/types";
 import Poster from "./poster";
 
 const MovieCard = ({ movie }: { movie: movieCardSchemaType }) => {

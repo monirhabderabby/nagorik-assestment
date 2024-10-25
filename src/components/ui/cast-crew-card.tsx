@@ -4,7 +4,7 @@ import Image from "next/image";
 // Local imports
 import { blurDataUrl } from "@/lib/blurDataUrl";
 import { fullImageSrc } from "@/lib/utils";
-import { castSchemaType } from "@/schemas/movie.schema";
+import { castSchemaType } from "@/types";
 
 interface castProps {
   data: castSchemaType;
