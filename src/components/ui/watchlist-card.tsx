@@ -1,27 +1,42 @@
 "use client";
 // Packages
-import { Heart, X } from "lucide-react";
+import { X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 // Local imports
+import { addToFavouriteList } from "@/actions/favourite";
 import { addToWatchList } from "@/actions/watchlist";
 import { fullImageSrc } from "@/lib/utils";
 import { watchListAndFavouriteType } from "@/schemas/movie.schema";
+import Link from "next/link";
 
-const WatchlistCard = ({ data }: { data: watchListAndFavouriteType }) => {
+interface Props {
+  data: watchListAndFavouriteType;
+  as: "watchlist" | "favouriteList";
+}
+
+const WatchlistCard = ({ data, as }: Props) => {
   const router = useRouter();
 
   // constants
   const src = fullImageSrc(data.banner_path!);
 
-  // handlers
+  // handlers for remove watchlist or favourite list item from cookies based on the as property recived from parent
+
   const handleRemove = () => {
-    addToWatchList(data, "remove");
+    //eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    (as === "watchlist" && addToWatchList(data, "remove")) ||
+      (as === "favouriteList" && addToFavouriteList(data, "remove"));
+
+    // refresh the page for re-render
     router.refresh();
   };
   return (
-    <div className="w-full shadow-[rgba(0,0,0,0.16)_0px_1px_4px] min-h-[200px] rounded-[4px] flex flex-col md:flex-row gap-x-6 items-center ">
+    <Link
+      href={`/movies/${data.id}`}
+      className="w-full shadow-[rgba(0,0,0,0.16)_0px_1px_4px] min-h-[200px] rounded-[4px] flex flex-col md:flex-row gap-x-6 items-center "
+    >
       <div className="min-h-[220px] w-full md:w-[153px] relative flex-initial">
         <Image src={src} alt="profile" fill className="rounded-l-[4px]" />
       </div>
@@ -37,12 +52,6 @@ const WatchlistCard = ({ data }: { data: watchListAndFavouriteType }) => {
         </p>
 
         <div className="flex gap-x-3">
-          <button className="group flex items-center gap-x-1">
-            <div className="w-[30px] h-[30px] group-hover:bg-gray-600 group-hover:text-white group-hover:border-white flex justify-center items-center rounded-full border-[1px] border-gray-400">
-              <Heart className="h-4 w-4 " />
-            </div>
-            Favourite
-          </button>
           <button
             onClick={handleRemove}
             className="group flex items-center gap-x-1"
@@ -54,7 +63,7 @@ const WatchlistCard = ({ data }: { data: watchListAndFavouriteType }) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
