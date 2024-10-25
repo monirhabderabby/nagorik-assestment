@@ -9,7 +9,6 @@ import { addToFavouriteList } from "@/actions/favourite";
 import { addToWatchList } from "@/actions/watchlist";
 import { fullImageSrc } from "@/lib/utils";
 import { watchListAndFavouriteType } from "@/schemas/movie.schema";
-import Link from "next/link";
 
 interface Props {
   data: watchListAndFavouriteType;
@@ -22,8 +21,11 @@ const WatchlistCard = ({ data, as }: Props) => {
   // constants
   const src = fullImageSrc(data.banner_path!);
 
-  // handlers for remove watchlist or favourite list item from cookies based on the as property recived from parent
+  const handleMoveToDynamicMoviePage = () => {
+    router.push(`/movies/${data.id}`);
+  };
 
+  // handlers for remove watchlist or favourite list item from cookies based on the as property recived from parent
   const handleRemove = () => {
     //eslint-disable-next-line @typescript-eslint/no-unused-expressions
     (as === "watchlist" && addToWatchList(data, "remove")) ||
@@ -33,27 +35,32 @@ const WatchlistCard = ({ data, as }: Props) => {
     router.refresh();
   };
   return (
-    <Link
-      href={`/movies/${data.id}`}
-      className="w-full shadow-[rgba(0,0,0,0.16)_0px_1px_4px] min-h-[200px] rounded-[4px] flex flex-col md:flex-row gap-x-6 items-center "
+    <div
+      onClick={handleMoveToDynamicMoviePage}
+      className="w-full shadow-[rgba(0,0,0,0.16)_0px_1px_4px] min-h-[200px] rounded-[4px] flex flex-col md:flex-row gap-x-6 items-center dark:bg-white/10"
     >
       <div className="min-h-[220px] w-full md:w-[153px] relative flex-initial">
         <Image src={src} alt="profile" fill className="rounded-l-[4px]" />
       </div>
       <div className="h-full flex flex-col gap-y-4 flex-1 p-4 md:p-2">
         <div>
-          <h1 className="text-[18px] font-semibold font-inter text-black">
+          <h1 className="text-[18px] font-semibold font-inter ">
             {data.title}
           </h1>
-          <p className="text-[14px] text-black/60">{data.overview}</p>
+          <p className="text-[14px] text-black/60 dark:text-white/70">
+            {data.overview}
+          </p>
         </div>
-        <p className="text-[15px] text-black/60 w-[95%] md:w-[90%]">
+        <p className="text-[15px] text-black/60 dark:text-white/70 w-[95%] md:w-[90%]">
           {data.overview}
         </p>
 
         <div className="flex gap-x-3">
           <button
-            onClick={handleRemove}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleRemove();
+            }}
             className="group flex items-center gap-x-1"
           >
             <div className="w-[30px] h-[30px] group-hover:bg-gray-600 group-hover:text-white group-hover:border-white flex justify-center items-center rounded-full border-[1px] border-gray-400">
@@ -63,7 +70,7 @@ const WatchlistCard = ({ data, as }: Props) => {
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
