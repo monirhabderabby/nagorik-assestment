@@ -2,8 +2,8 @@ import Navbar from "@/components/common/navbar";
 import NProgress from "@/provider/NProgress";
 import NextQueryClientProvider from "@/provider/query-client-provider";
 import type { Metadata } from "next";
-import { CookiesProvider } from "next-client-cookies/server";
 import { Inter, Poppins } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 // Fonts
@@ -34,13 +34,12 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${poppins.className} antialiased pb-[500px]`}
       >
-        <CookiesProvider>
-          <NextQueryClientProvider>
-            <NProgress />
-            <Navbar />
-            {children}
-          </NextQueryClientProvider>
-        </CookiesProvider>
+        <NextQueryClientProvider>
+          <Toaster />
+          <NProgress />
+          <Navbar />
+          {children}
+        </NextQueryClientProvider>
       </body>
     </html>
   );

@@ -1,10 +1,10 @@
 // Packages
-import { Heart, Play, ShoppingCart } from "lucide-react";
 
 // Local imports
 import Poster from "@/components/ui/poster";
 import { fullImageSrc, getGenreNames } from "@/lib/utils";
 import { movieDetailsSchemaType } from "@/schemas/movie.schema";
+import BannerActions from "./banner-action";
 
 interface Props {
   movie: movieDetailsSchemaType;
@@ -28,7 +28,7 @@ const MovieDetailsBanner = ({ movie }: Props) => {
         />
         <div className="text-white space-y-4">
           <MovieInfo title={movie.original_title} genres={genres} />
-          <BannerActions />
+          <BannerActions movie={movie} />
           <BannerOverview tagline={movie.tagline!} overview={movie.overview} />
         </div>
       </div>
@@ -54,26 +54,6 @@ const MovieInfo = ({ title, genres }: MovieInfoProps) => {
 };
 
 // Banner Actions Components
-
-const BannerActions = () => (
-  <div className="flex items-center gap-x-4">
-    <button className="px-5 py-2 h-10 bg-white/20 hover:bg-white/40 transition-colors duration-300 flex items-center gap-x-2 rounded-md">
-      <Play className="h-5 w-5" /> Play
-    </button>
-    <button
-      title="Add to Wishlist"
-      className=" bg-white/20 h-10 w-10 hover:bg-white/40 transition-colors duration-300 gap-x-2 rounded-full flex justify-center items-center"
-    >
-      <Heart className="h-5 w-5" />
-    </button>
-    <button
-      title="Add to Cart"
-      className=" bg-white/20 h-10 w-10 hover:bg-white/40 transition-colors duration-300 gap-x-2 rounded-full flex justify-center items-center"
-    >
-      <ShoppingCart className="h-5 w-5" />
-    </button>
-  </div>
-);
 
 // Banner Overview
 
