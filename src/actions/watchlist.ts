@@ -1,9 +1,7 @@
 "use server";
 
-import {
-  watchListAndFavouriteSchema,
-  watchListAndFavouriteType,
-} from "@/schemas/movie.schema";
+import { watchListAndFavouriteSchema } from "@/schemas/movie.schema";
+import { watchListAndFavouriteType } from "@/types";
 import { cookies } from "next/headers";
 
 export type cookiesResponse = {

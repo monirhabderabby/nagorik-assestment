@@ -1,5 +1,5 @@
 import MovieRecomendationCard from "@/components/ui/movie-recomendation-card";
-import { movieCardSchemaType } from "@/schemas/movie.schema";
+import { movieCardSchemaType } from "@/types";
 
 interface Props {
   recomendations?: movieCardSchemaType[];

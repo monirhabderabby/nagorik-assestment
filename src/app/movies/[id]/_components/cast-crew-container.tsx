@@ -6,10 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import CastCrewCard from "@/components/ui/cast-crew-card";
 import ResponseError from "@/components/ui/error";
 import SkeletonWrapper from "@/components/ui/skeleton-wrapper";
-import {
-  castAndCrewCombinedSchema,
-  castSchemaType,
-} from "@/schemas/movie.schema";
+import { castAndCrewCombinedSchema } from "@/schemas/movie.schema";
+import { castSchemaType } from "@/types";
 
 // Interface for the component props
 interface Props {

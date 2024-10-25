@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { addToFavouriteList } from "@/actions/favourite";
 import { addToWatchList } from "@/actions/watchlist";
 import { fullImageSrc } from "@/lib/utils";
-import { watchListAndFavouriteType } from "@/schemas/movie.schema";
+import { watchListAndFavouriteType } from "@/types";
 
 interface Props {
   data: watchListAndFavouriteType;

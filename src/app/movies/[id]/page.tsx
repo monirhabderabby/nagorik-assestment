@@ -1,11 +1,11 @@
 // Next.js will invalidate the cache when a
 
+import { movieDetailsSchema } from "@/schemas/movie.schema";
 import {
   movieCardSchemaType,
-  movieDetailsSchema,
   movieDetailsSchemaType,
   populerMoviesResponseSchemaType,
-} from "@/schemas/movie.schema";
+} from "@/types";
 import MovieDetailsContainer from "./_components/movie-details-container";
 
 // request comes in, at most once every 60 seconds.

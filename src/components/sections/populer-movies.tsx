@@ -4,11 +4,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
 // Local imports
-import {
-  movieCardSchemaType,
-  populerMoviesResponseSchema,
-  populerMoviesResponseSchemaType,
-} from "@/schemas/movie.schema";
+import { populerMoviesResponseSchema } from "@/schemas/movie.schema";
+import { movieCardSchemaType, populerMoviesResponseSchemaType } from "@/types";
 import ResponseError from "../ui/error";
 import MovieCard from "../ui/movie-card";
 import SkeletonWrapper from "../ui/skeleton-wrapper";

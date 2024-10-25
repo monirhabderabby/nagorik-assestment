@@ -15,10 +15,7 @@ import { toast } from "sonner";
 // Local imports
 import { addToFavouriteList } from "@/actions/favourite";
 import { addToWatchList, cookiesResponse } from "@/actions/watchlist";
-import {
-  movieDetailsSchemaType,
-  watchListAndFavouriteType,
-} from "@/schemas/movie.schema";
+import { movieDetailsSchemaType, watchListAndFavouriteType } from "@/types";
 
 interface Props {
   movie: movieDetailsSchemaType;

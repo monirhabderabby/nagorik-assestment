@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { blurDataUrl } from "@/lib/blurDataUrl";
 import { fullImageSrc } from "@/lib/utils";
-import { movieCardSchemaType } from "@/schemas/movie.schema";
+import { movieCardSchemaType } from "@/types";
 
 interface Props {
   data: movieCardSchemaType;
