@@ -1,5 +1,3 @@
-// Packages
-
 // Local imports
 import Poster from "@/components/ui/poster";
 import { fullImageSrc, getGenreNames } from "@/lib/utils";
@@ -52,8 +50,6 @@ const MovieInfo = ({ title, genres }: MovieInfoProps) => {
     </div>
   );
 };
-
-// Banner Actions Components
 
 // Banner Overview
 

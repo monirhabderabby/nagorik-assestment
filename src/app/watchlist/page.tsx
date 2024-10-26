@@ -1,5 +1,5 @@
 import { cookiesResponse, getAllWatchList } from "@/actions/watchlist";
-import WatchlistCard from "@/components/ui/watchlist-card";
+import WatchlistCard from "@/components/common/cards/watchlist-card";
 import { watchListAndFavouriteType } from "@/types";
 
 const Page = async () => {
@@ -31,7 +31,7 @@ const Page = async () => {
       <h1 className="text-[26px] font-semibold font-inter ">
         My Watchlist: {watchlists.data.length}
       </h1>
-      {content}
+      <>{content}</>
     </div>
   );
 };

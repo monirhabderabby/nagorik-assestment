@@ -16,7 +16,9 @@ export default function Error({
 
   return (
     <div className="w-full h-[calc(100vh-80px)] flex justify-center items-center flex-col gap-y-5">
-      <h2 className="text-red-400">Something went wrong!</h2>
+      <h2 className="text-red-400">
+        {error.message || "Something went wrong!"}
+      </h2>
       <button
         onClick={
           // Attempt to recover by trying to re-render the segment

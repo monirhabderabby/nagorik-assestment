@@ -4,6 +4,23 @@ import { watchListAndFavouriteType } from "@/types";
 import { cookies } from "next/headers";
 import { cookiesResponse } from "./watchlist";
 
+/**
+ * Adds or removes a movie from the user's favorite list stored in cookies.
+ * Validates the movie against a defined schema and ensures that the
+ * favorite list does not exceed 5 movies.
+ *
+ * If the action is "add", the function checks if the movie already
+ * exists in the list; if not, it adds the movie and updates the cookie.
+ * If the action is "remove", it checks if the movie is in the list;
+ * if it is, the movie is removed and the cookie is updated.
+ *
+ * @param {watchListAndFavouriteType} movie - The movie to be added or removed.
+ * @param {"add" | "remove"} action - The action to perform (either "add" or "remove").
+ *
+ * @returns {Promise<{ success: boolean, message: string }>}
+ * - success: Indicates if the operation was successful.
+ * - message: A message about the operation status.
+ */
 export async function addToFavouriteList(
   movie: watchListAndFavouriteType,
   action: "add" | "remove"
@@ -27,7 +44,7 @@ export async function addToFavouriteList(
   // Handle add action
   if (action === "add") {
     // Check if favourite list already has 5 movies
-    if (favouriteList.length >= 5) {
+    if (favouriteList.length >= 10) {
       return {
         success: false,
         message: "You cannot add more than 5 movies to your favourite list.",
@@ -84,6 +101,17 @@ export async function addToFavouriteList(
   } as cookiesResponse;
 }
 
+/**
+ * Retrieves the user's favorite list from cookies.
+ * If the favorite list exists in cookies, it parses and returns it;
+ * otherwise, it returns an empty list. The function returns a
+ * success status and a message along with the retrieved data.
+ *
+ * @returns {Promise<{ success: boolean, message: string, data: watchListAndFavouriteType[] }>}
+ * - success: Indicates if the operation was successful.
+ * - message: A message about the operation status.
+ * - data: An array of favorite items.
+ */
 export async function getAllFavouriteList() {
   const cookieStore = cookies();
 

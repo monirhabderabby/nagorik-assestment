@@ -9,6 +9,26 @@ export type cookiesResponse = {
   message: string;
 };
 
+/**
+ * This function, `addToWatchList`, manages adding or removing a movie to/from a user's watchlist.
+ * The function supports two actions, "add" and "remove", which are specified by the `action` parameter.
+ *
+ * It performs the following steps:
+ * 1. Validates the movie data against a predefined schema (`watchListAndFavouriteSchema`) to ensure it conforms to the expected structure.
+ * 2. Retrieves the current watchlist data from cookies, parsing it if available, and initializing an empty array if not.
+ * 3. For the "add" action:
+ *    - Checks if the watchlist already has a maximum of 5 movies, and returns an error if so.
+ *    - Ensures the movie isn't already on the watchlist before adding.
+ *    - Adds the movie to the watchlist and updates the cookie.
+ * 4. For the "remove" action:
+ *    - Verifies if the movie exists in the watchlist.
+ *    - Removes the movie from the list if found and updates the cookie.
+ * 5. Returns a success or error message based on the action outcome.
+ *
+ * @param movie - An object containing details about the movie, following the `watchListAndFavouriteType` structure.
+ * @param action - A string specifying the action to perform, either "add" or "remove".
+ * @returns An object containing a `success` flag and a `message` describing the result.
+ */
 export async function addToWatchList(
   movie: watchListAndFavouriteType,
   action: "add" | "remove"
@@ -89,6 +109,19 @@ export async function addToWatchList(
   } as cookiesResponse;
 }
 
+/**
+ * This function, `getAllWatchList`, retrieves the current list of movies in the user's watchlist from cookies.
+ *
+ * It performs the following steps:
+ * 1. Accesses the `watchlist` cookie and retrieves its value, if available.
+ * 2. Parses the cookie data to obtain the watchlist, initializing an empty array if no data exists.
+ * 3. Returns an object containing:
+ *    - `success`: A flag indicating successful data retrieval.
+ *    - `message`: A success message confirming that the watchlist data was retrieved.
+ *    - `data`: The list of movies in the watchlist.
+ *
+ * @returns An object with a `success` flag, a `message`, and `data` (an array of movies) from the user's watchlist.
+ */
 export async function getAllWatchList() {
   const cookieStore = cookies();
 

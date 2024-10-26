@@ -32,7 +32,7 @@ const MovieDetailsSidebar = ({ movie }: Props) => {
             <div className="flex flex-wrap gap-3 mt-2">
               {movie.genres.map((g: genre) => (
                 <p
-                  className="bg-gray-100 dark:bg-gray-100/10 border-[.5px] border-gray-200 rounded-[5px] w-fit px-2 text-[14px]"
+                  className="bg-gray-100 dark:bg-gray-100/10 border-[.5px] border-gray-200 rounded-[5px] text-[12px] w-fit px-2 py-1"
                   key={g.id}
                 >
                   {g.name}

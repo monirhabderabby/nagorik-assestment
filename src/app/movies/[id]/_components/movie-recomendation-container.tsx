@@ -1,4 +1,4 @@
-import MovieRecomendationCard from "@/components/ui/movie-recomendation-card";
+import MovieRecomendationCard from "@/components/common/cards/movie-recomendation-card";
 import { movieCardSchemaType } from "@/types";
 
 interface Props {
