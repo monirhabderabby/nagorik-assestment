@@ -9,18 +9,14 @@ import { z } from "zod";
 // Local imports
 import { useSearchTerm } from "@/hooks/searchTerm";
 import { SearchTermSchema, SearchTermType } from "@/schemas/search.schema";
-import { useCallback } from "react";
+import { useMemo } from "react";
 import { Input } from "./input";
 
 const SearchField = () => {
   const { setSearchTerm, searchTerm } = useSearchTerm();
 
   // react-hook-forms
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SearchTermType>({
+  const { register, handleSubmit } = useForm<SearchTermType>({
     resolver: zodResolver(SearchTermSchema),
     defaultValues: {
       searchTerm: searchTerm,
@@ -28,8 +24,8 @@ const SearchField = () => {
   });
 
   // Create a debounced version of setSearchTerm
-  const debouncedSetSearchTerm = useCallback(
-    debounce((value: string) => setSearchTerm(value), 300), // 300ms debounce
+  const debouncedSetSearchTerm = useMemo(
+    () => debounce((value) => setSearchTerm(value), 500),
     [setSearchTerm]
   );
 

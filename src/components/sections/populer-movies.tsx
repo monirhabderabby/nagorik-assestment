@@ -117,8 +117,8 @@ export default PopulerMovies;
 const Loader = () => {
   return (
     <div className="container grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5  mt-10 gap-4 gap-y-8">
-      {Array.from({ length: 10 }).map((_, index) => (
-        <Skeleton>
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+        <Skeleton key={n}>
           <div className="w-[260px] h-[340px] rounded-[4px] bg-black/5 dark:bg-white/5 flex justify-center items-center text-[14px]">
             Loading...
           </div>
