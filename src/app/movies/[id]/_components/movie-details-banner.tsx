@@ -28,6 +28,10 @@ const MovieDetailsBanner = ({ movie }: Props) => {
           <MovieInfo title={movie.original_title} genres={genres} />
           <BannerActions movie={movie} />
           <BannerOverview tagline={movie.tagline!} overview={movie.overview} />
+          <div className="text-[15px] text-white">
+            <span className="text-white font-semibold ">{movie.status}: </span>
+            <span>{movie.release_date}</span>
+          </div>
         </div>
       </div>
     </section>
