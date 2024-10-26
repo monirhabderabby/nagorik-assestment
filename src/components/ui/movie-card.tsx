@@ -15,7 +15,7 @@ const MovieCard = ({ movie }: { movie: movieCardSchemaType }) => {
         <Poster
           src={movie.poster_path!}
           alt={movie.original_title}
-          containerClass="w-[220px] h-[330px]"
+          containerClass="w-[220px] h-[330px] relative"
           className="rounded-[4px] hover:scale-110 transition-transform duration-300"
         />
       </div>

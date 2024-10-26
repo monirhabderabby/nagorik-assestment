@@ -1,6 +1,10 @@
 "use client";
+// Packages
+import dynamic from "next/dynamic";
+
+// Local imports
 import { useTheme } from "@/hooks/theme";
-import SearchField from "./search";
+const SearchField = dynamic(() => import("./search"), { ssr: false });
 
 const Hero = () => {
   const { theme } = useTheme();
