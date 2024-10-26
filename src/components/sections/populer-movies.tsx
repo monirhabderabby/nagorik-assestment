@@ -4,27 +4,36 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
 // Local imports
+import { useSearchTerm } from "@/hooks/searchTerm";
 import { populerMoviesResponseSchema } from "@/schemas/movie.schema";
 import { movieCardSchemaType, populerMoviesResponseSchemaType } from "@/types";
 import MovieCard from "../common/cards/movie-card";
 import ResponseError from "../ui/error";
-import SkeletonWrapper from "../ui/skeleton-wrapper";
+import { Skeleton } from "../ui/skeleton";
 
 const PopulerMovies = () => {
+  const { searchTerm } = useSearchTerm();
   const {
     data: response,
     isError,
     error,
     isLoading,
     fetchNextPage,
+    isFetching,
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<populerMoviesResponseSchemaType>({
-    queryKey: ["populerMovies"],
+    queryKey: ["populerMovies", searchTerm],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     queryFn: ({ pageParam = 1 }: any) =>
       fetch(
-        `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageParam}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+        searchTerm
+          ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+              searchTerm
+            )}&page=${pageParam}&language=en-US&api_key=${
+              process.env.NEXT_PUBLIC_TMDB_API_KEY
+            }`
+          : `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageParam}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
       )
         .then((res) => res.json())
         .then((response) => {
@@ -51,15 +60,7 @@ const PopulerMovies = () => {
 
   // If data is still loading, show a skeleton loader
   if (isLoading) {
-    content = (
-      <div className="container grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5  mt-10 gap-4 gap-y-8">
-        {Array.from({ length: 10 }).map((_, index) => (
-          <SkeletonWrapper isLoading={isLoading} key={index}>
-            <div className="w-[260px] h-[340px] rounded-[4px]">fdsfs</div>
-          </SkeletonWrapper>
-        ))}
-      </div>
-    );
+    content = <Loader />;
   }
   // If there is an error, display an error message.
   else if (isError) {
@@ -113,3 +114,17 @@ const PopulerMovies = () => {
 };
 
 export default PopulerMovies;
+
+const Loader = () => {
+  return (
+    <div className="container grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5  mt-10 gap-4 gap-y-8">
+      {Array.from({ length: 10 }).map((_, index) => (
+        <Skeleton>
+          <div className="w-[260px] h-[340px] rounded-[4px] bg-black/5 dark:bg-white/5 flex justify-center items-center text-[14px]">
+            Loading...
+          </div>
+        </Skeleton>
+      ))}
+    </div>
+  );
+};
