@@ -26,10 +26,17 @@ const WatchlistCard = ({ data, as }: Props) => {
   };
 
   // handlers for remove watchlist or favourite list item from cookies based on the as property recived from parent
-  const handleRemove = () => {
+  const handleRemove = async () => {
     //eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    (as === "watchlist" && addToWatchList(data, "remove")) ||
-      (as === "favouriteList" && addToFavouriteList(data, "remove"));
+    let res;
+
+    if (as === "watchlist") {
+      res = await addToWatchList(data, "remove");
+    } else if (as === "favouriteList") {
+      res = await addToFavouriteList(data, "remove");
+    }
+
+    console.log(res);
 
     // refresh the page for re-render
     router.refresh();
@@ -40,7 +47,13 @@ const WatchlistCard = ({ data, as }: Props) => {
       className="w-full shadow-[rgba(0,0,0,0.16)_0px_1px_4px] min-h-[200px] rounded-[4px] flex flex-col md:flex-row gap-x-6 items-center dark:bg-white/10"
     >
       <div className="min-h-[220px] w-full md:w-[153px] relative flex-initial">
-        <Image src={src} alt="profile" fill className="rounded-l-[4px]" />
+        <Image
+          src={src}
+          alt="profile"
+          fill
+          className="rounded-l-[4px]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
       <div className="h-full flex flex-col gap-y-4 flex-1 p-4 md:p-2">
         <div>

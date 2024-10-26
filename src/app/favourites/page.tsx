@@ -21,7 +21,11 @@ const Page = async () => {
     content = (
       <div className="mt-5 space-y-4 ">
         {favourites.data.map((watchlist: watchListAndFavouriteType) => (
-          <WatchlistCard data={watchlist} key={watchlist.id} as="watchlist" />
+          <WatchlistCard
+            data={watchlist}
+            key={watchlist.id}
+            as="favouriteList"
+          />
         ))}
       </div>
     );
