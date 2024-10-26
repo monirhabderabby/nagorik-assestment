@@ -14,7 +14,7 @@ const CastCrewCard = ({ data }: castProps) => {
   const profile = fullImageSrc(data.profile_path!);
 
   return (
-    <div className="w-[150px] md:w-[175px] h-auto shadow-md rounded-[8px] ">
+    <div className="w-[150px] md:w-[175px] h-auto shadow-md rounded-[8px] mx-auto">
       <div className="w-full h-[160px] md:h-[215px] rounded-[8px] relative">
         {data.profile_path ? (
           <Image

@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "w-full h-[80px]",
+        "w-full h-[65px] md:h-[80px]",
         theme === "dark" ? "bg-black border-b-0" : "bg-white border-b"
       )}
     >

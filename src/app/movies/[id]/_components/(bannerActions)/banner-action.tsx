@@ -91,8 +91,6 @@ const BannerActions = ({ movie }: Props) => {
     setIsFavourite(action === "add" ? true : false);
     const res: cookiesResponse = await addToFavouriteList(movieData, action);
 
-    console.log(res);
-
     if (!res.success) {
       toast.error(res.message, {
         className: "text-red-500",

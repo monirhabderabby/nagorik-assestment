@@ -52,7 +52,7 @@ const CastCrewContainer = ({ movieId }: Props) => {
   // If data is successfully fetched, display the cast cards.
   else if (data) {
     castContent = (
-      <div className="pt-3 flex flex-wrap gap-6 w-full">
+      <div className="pt-3 grid grid-cols-2 md:grid-cols-4 gap-6 w-full">
         {data.cast.slice(0, 6).map((cast: castSchemaType) => (
           <CastCrewCard key={cast.id} data={cast} />
         ))}

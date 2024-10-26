@@ -13,7 +13,7 @@ const Hero = () => {
       className="h-[50vh] w-full  border-t border-white/15 bg-no-repeat bg-cover"
       style={{
         backgroundImage:
-          theme === "light" ? "url(/wildrobot.webp)" : "url(/banner.jpg)",
+          theme === "light" ? "url(/daddy-head.webp)" : "url(/banner.jpg)",
       }}
     >
       <div className="text-white/80 container h-full flex items-start flex-col justify-center gap-y-4">
