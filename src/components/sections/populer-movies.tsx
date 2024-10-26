@@ -19,7 +19,6 @@ const PopulerMovies = () => {
     error,
     isLoading,
     fetchNextPage,
-    isFetching,
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<populerMoviesResponseSchemaType>({
