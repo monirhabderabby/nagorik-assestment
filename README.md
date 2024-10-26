@@ -60,9 +60,11 @@ This project is a responsive movie search and details application built with Nex
 ```
 ├── actions
 ├── app
-│   ├── index.js            # Homepage with popular movies
-│   ├── movie/[id].js       # Movie details page
-│   └── watchlist.js        # Watchlist management page
+│   ├──── favourites           # Favourite page
+│   ├── movies                
+│   │     ├── [id]             # Movie details page
+│   ├──── watchlist            # Watchlist page
+│   └──── page.tsx             # Home page
 ├── components
 ├── hooks
 ├── lib
