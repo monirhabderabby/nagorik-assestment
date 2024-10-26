@@ -16,12 +16,13 @@ import { toast } from "sonner";
 import { addToFavouriteList } from "@/actions/favourite";
 import { addToWatchList, cookiesResponse } from "@/actions/watchlist";
 import { movieDetailsSchemaType, watchListAndFavouriteType } from "@/types";
+import Action from "./action";
 
 interface Props {
   movie: movieDetailsSchemaType;
 }
 
-type action = "add" | "remove";
+export type action = "add" | "remove";
 
 const BannerActions = ({ movie }: Props) => {
   const [isWatched, setWatched] = useState(false);
@@ -36,45 +37,69 @@ const BannerActions = ({ movie }: Props) => {
     title: movie.original_title,
   };
 
-  // check if the card is already in watchlists . if found then bookmark icon will be hidden
   useEffect(() => {
-    const data = getCookie("watchlist");
+    // Retrieve "watchlist" cookies and "favouriteList" cookies for the user
+    const watchlistCookiesRes = getCookie("watchlist");
+    const favouriteCookiesRes = getCookie("favouriteList");
 
-    const parsedData: watchListAndFavouriteType[] | [] = data
-      ? JSON.parse(data)
+    // Parse the "watchlist" cookie if it exists; otherwise, initialize an empty array
+    const watchlists: watchListAndFavouriteType[] | [] = watchlistCookiesRes
+      ? JSON.parse(watchlistCookiesRes)
       : [];
-    const ids = parsedData.map((m: watchListAndFavouriteType) => m.id);
 
-    const exist = ids.includes(movie.id);
+    // Parse the "favouriteList" cookie if it exists; otherwise, initialize an empty array
+    const favouriteLists: watchListAndFavouriteType[] | [] = favouriteCookiesRes
+      ? JSON.parse(favouriteCookiesRes)
+      : [];
 
-    if (exist) setWatched(true);
+    // Extract IDs of movies in the watchlist
+    const idsOfWatchlists = watchlists.map(
+      (m: watchListAndFavouriteType) => m.id
+    );
+
+    // Extract IDs of movies in the favourite list
+    const idsOfFavouriteLists = favouriteLists.map((f) => f.id);
+
+    // Check if the current movie exists in the watchlist
+    const isWatchListExist = idsOfWatchlists.includes(movie.id);
+
+    // Check if the current movie exists in the favourite list
+    const isFavouriteExist = idsOfFavouriteLists.includes(movie.id);
+
+    if (isWatchListExist) setWatched(true);
+
+    if (isFavouriteExist) setIsFavourite(true);
   }, [movie.id]);
 
   // handler for add to watchlist list on the cookies by server action
   const handleWatchlist = async (action: action) => {
+    setWatched(!isWatched);
     const res: cookiesResponse = await addToWatchList(movieData, action);
 
     if (!res.success) {
       toast.error(res.message, {
         className: "text-red-500",
       });
+      setWatched(!isWatched);
     } else {
       toast.success(res.message);
-      setWatched(!isWatched);
     }
   };
 
   // handler for add to favourite list on the cookies by server action
   const handleFavouriteList = async (action: action) => {
+    setIsFavourite(action === "add" ? true : false);
     const res: cookiesResponse = await addToFavouriteList(movieData, action);
+
+    console.log(res);
 
     if (!res.success) {
       toast.error(res.message, {
         className: "text-red-500",
       });
+      setIsFavourite(false);
     } else {
       toast.success(res.message);
-      setIsFavourite(!isFavourite);
     }
   };
 
@@ -83,28 +108,29 @@ const BannerActions = ({ movie }: Props) => {
       <button className="px-5 py-2 h-10 bg-white/20 hover:bg-white/40 transition-colors duration-300 flex items-center gap-x-2 rounded-md">
         <Play className="h-5 w-5" /> Play
       </button>
-      <button
-        onClick={() => handleFavouriteList(isFavourite ? "remove" : "add")}
-        title="Add to watchlist"
-        className=" bg-white/20 h-10 w-10 hover:bg-white/40 transition-colors duration-300 gap-x-2 rounded-full flex justify-center items-center"
+      <Action
+        isChecked={isFavourite}
+        title="Add to favourite"
+        onMarked={handleFavouriteList}
       >
         {isFavourite ? (
           <IoHeart className="h-5 w-5" />
         ) : (
           <IoHeartOutline className="h-5 w-5" />
         )}
-      </button>
-      <button
-        onClick={() => handleWatchlist(isWatched ? "remove" : "add")}
+      </Action>
+
+      <Action
+        isChecked={isWatched}
         title="Add to Watchlist"
-        className=" bg-white/20 h-10 w-10 hover:bg-white/40 transition-colors duration-300 gap-x-2 rounded-full flex justify-center items-center "
+        onMarked={handleWatchlist}
       >
         {isWatched ? (
           <IoBookmark className="h-5 w-5 " />
         ) : (
           <IoBookmarkOutline className="h-5 w-5 " />
         )}
-      </button>
+      </Action>
     </div>
   );
 };

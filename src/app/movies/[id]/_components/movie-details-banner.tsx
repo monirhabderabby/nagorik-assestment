@@ -2,7 +2,7 @@
 import Poster from "@/components/ui/poster";
 import { fullImageSrc, getGenreNames } from "@/lib/utils";
 import { movieDetailsSchemaType } from "@/types";
-import BannerActions from "./banner-action";
+import BannerActions from "./(bannerActions)/banner-action";
 
 interface Props {
   movie: movieDetailsSchemaType;
