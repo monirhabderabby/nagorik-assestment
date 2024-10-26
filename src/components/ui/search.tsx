@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 
 // Local imports
 import { SearchTermSchema, SearchTermType } from "@/schemas/search.schema";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { Input } from "./input";
 
 const SearchField = () => {
@@ -19,9 +21,24 @@ const SearchField = () => {
     resolver: zodResolver(SearchTermSchema),
   });
 
+  const { isPending, data, mutate } = useMutation({
+    mutationFn: (queryText: string) =>
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${queryText}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+      ).then((res) => res.json()),
+  });
+
+  useEffect(() => {
+    if (data) {
+      // do some stuff
+    }
+  }, [data]);
+
   // handle form submit
   const onSubmit = (data: SearchTermType) => {
-    console.log("Search data:", data);
+    setTimeout(() => {
+      mutate(data.searchTerm);
+    }, 2000);
   };
 
   return (
