@@ -2,67 +2,57 @@
 
 // Packages
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Search } from "lucide-react";
+import { debounce } from "lodash"; // Import debounce
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 // Local imports
+import { useSearchTerm } from "@/hooks/searchTerm";
 import { SearchTermSchema, SearchTermType } from "@/schemas/search.schema";
-import { useMutation } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useMemo } from "react";
 import { Input } from "./input";
 
 const SearchField = () => {
+  const { setSearchTerm, searchTerm } = useSearchTerm();
+
   // react-hook-forms
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SearchTermType>({
+  const { register, handleSubmit } = useForm<SearchTermType>({
     resolver: zodResolver(SearchTermSchema),
+    defaultValues: {
+      searchTerm: searchTerm,
+    },
   });
 
-  const { isPending, data, mutate } = useMutation({
-    mutationFn: (queryText: string) =>
-      fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${queryText}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-      ).then((res) => res.json()),
-  });
+  // Create a debounced version of setSearchTerm
+  const debouncedSetSearchTerm = useMemo(
+    () => debounce((value) => setSearchTerm(value), 500),
+    [setSearchTerm]
+  );
 
-  useEffect(() => {
-    if (data || isPending) {
-      // do some stuff
-    }
-  }, [data, isPending]);
+  // Handle input change with debouncing
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    debouncedSetSearchTerm(value);
+  };
 
   // handle form submit
-  const onSubmit = (data: SearchTermType) => {
-    setTimeout(() => {
-      mutate(data.searchTerm);
-    }, 2000);
+  const onSubmit = (data: z.infer<typeof SearchTermSchema>) => {
+    setSearchTerm(data.searchTerm);
   };
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex items-center gap-x-2"
-      >
-        <div className="max-w-[500px]">
-          <Input
-            className="text-black text-[18px] w-auto md:w-[500px]"
-            placeholder="Search for a movie, tv show, person..."
-            {...register("searchTerm")}
-          />
-        </div>
-        <button className="bg-white text-black h-10 w-10 flex justify-center items-center rounded-md hover:text-black/80 hover:bg-white/80 transition-colors duration-300">
-          <Search />
-        </button>
-      </form>
-      {/* Display validation errors */}
-      {errors.searchTerm && (
-        <p className="text-red-500 text-sm mt-1">{errors.searchTerm.message}</p>
-      )}
-    </>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex items-center gap-x-2"
+    >
+      <div className="max-w-[500px]">
+        <Input
+          className="text-black text-[18px] w-auto md:w-[500px]"
+          placeholder="Search for a movie, tv show, person..."
+          {...register("searchTerm", { onChange: handleInputChange })} // Use handleInputChange
+        />
+      </div>
+    </form>
   );
 };
 

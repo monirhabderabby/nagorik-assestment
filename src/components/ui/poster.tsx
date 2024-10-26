@@ -14,6 +14,13 @@ interface Props {
 
 const Poster = ({ src, containerClass, alt, className }: Props) => {
   const imgUrl = fullImageSrc(src);
+
+  if (!src)
+    return (
+      <div className="h-full w-full bg-black/5 dark:bg-white/5 text-[13px] flex justify-center items-center">
+        Poster not published
+      </div>
+    );
   return (
     <div className={cn(containerClass, "rounded-[6px]")}>
       <Image
