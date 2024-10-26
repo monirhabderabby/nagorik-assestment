@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 // Local imports
-import CastCrewCard from "@/components/ui/cast-crew-card";
+import CastCrewCard from "@/components/common/cards/cast-crew-card";
 import ResponseError from "@/components/ui/error";
 import SkeletonWrapper from "@/components/ui/skeleton-wrapper";
 import { castAndCrewCombinedSchema } from "@/schemas/movie.schema";
@@ -41,17 +41,9 @@ const CastCrewContainer = ({ movieId }: Props) => {
   // Variable to hold the JSX for the cast content (loading, error, or actual data).
   let castContent;
 
-  // If data is still loading, show a skeleton loader
+  // If data is still loading, show a skeleton loader Component
   if (isLoading) {
-    castContent = (
-      <div className="pt-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        {[1, 2, 3, 4, 5].map((n) => (
-          <SkeletonWrapper isLoading={isLoading} key={n}>
-            <div className="w-[175px] h-[275px]"></div>
-          </SkeletonWrapper>
-        ))}
-      </div>
-    );
+    castContent = <Loader isLoading={isLoading} />;
   }
   // If there is an error, display an error message.
   else if (isError) {
@@ -83,3 +75,16 @@ const CastCrewContainer = ({ movieId }: Props) => {
 };
 
 export default CastCrewContainer;
+
+// Loader Component
+const Loader = ({ isLoading }: { isLoading: boolean }) => {
+  return (
+    <div className="pt-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <SkeletonWrapper isLoading={isLoading} key={n}>
+          <div className="w-[175px] h-[275px]"></div>
+        </SkeletonWrapper>
+      ))}
+    </div>
+  );
+};

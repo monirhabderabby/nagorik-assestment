@@ -27,7 +27,7 @@ const BannerActions = ({ movie }: Props) => {
   const [isWatched, setWatched] = useState(false);
   const [isFavourite, setIsFavourite] = useState(false);
 
-  // Create a plain object for the movie
+  // Prepare a plain object for store in cookies
   const movieData: watchListAndFavouriteType = {
     id: movie.id,
     banner_path: movie.poster_path,
@@ -77,6 +77,7 @@ const BannerActions = ({ movie }: Props) => {
       setIsFavourite(!isFavourite);
     }
   };
+
   return (
     <div className="flex items-center gap-x-4">
       <button className="px-5 py-2 h-10 bg-white/20 hover:bg-white/40 transition-colors duration-300 flex items-center gap-x-2 rounded-md">

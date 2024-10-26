@@ -6,8 +6,8 @@ import { Loader2 } from "lucide-react";
 // Local imports
 import { populerMoviesResponseSchema } from "@/schemas/movie.schema";
 import { movieCardSchemaType, populerMoviesResponseSchemaType } from "@/types";
+import MovieCard from "../common/cards/movie-card";
 import ResponseError from "../ui/error";
-import MovieCard from "../ui/movie-card";
 import SkeletonWrapper from "../ui/skeleton-wrapper";
 
 const PopulerMovies = () => {
