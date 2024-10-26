@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { Toaster } from "sonner";
 
 // Local imports
+import Footer from "@/components/common/footer";
 import Navbar from "@/components/common/navbar";
 import { ThemeOptions, useTheme } from "@/hooks/theme";
 import { cn } from "@/lib/utils";
@@ -33,6 +34,7 @@ const RootProvider = ({ children }: Props) => {
         <NProgress />
         <Navbar />
         {children}
+        <Footer />
       </NextQueryClientProvider>
     </main>
   );

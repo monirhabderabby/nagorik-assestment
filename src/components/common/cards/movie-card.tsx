@@ -9,13 +9,13 @@ const MovieCard = ({ movie }: { movie: movieCardSchemaType }) => {
   return (
     <Link
       href={`/movies/${movie.id}`}
-      className=" w-full md:w-[240px] h-auto cursor-pointer mx-auto"
+      className=" w-full md:w-[240px] h-auto cursor-pointer mr-auto "
     >
       <div className="relative w-full h-[340px] md:h-[310px] overflow-hidden rounded-[4px]">
         <Poster
           src={movie.poster_path!}
           alt={movie.original_title}
-          containerClass="w-[220px] h-[330px] relative"
+          containerClass=" w-full md:w-[220px] h-[330px] relative"
           className="rounded-[4px] hover:scale-110 transition-transform duration-300"
         />
       </div>
