@@ -29,10 +29,10 @@ const SearchField = () => {
   });
 
   useEffect(() => {
-    if (data) {
+    if (data || isPending) {
       // do some stuff
     }
-  }, [data]);
+  }, [data, isPending]);
 
   // handle form submit
   const onSubmit = (data: SearchTermType) => {
