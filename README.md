@@ -91,5 +91,10 @@ This project is a responsive movie search and details application built with Nex
    npm run dev
    ```
 
+## 📞 Connect with Me
 
+- **Portfolio**: [Your Portfolio Link](https://www.monirhrabby.com)
+- **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/monirhabderabby)
+- **GitHub**: [Your GitHub Profile](https://github.com/monirhabderabby)
+- **Phone**: +880-196-1275391
 
