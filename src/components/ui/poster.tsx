@@ -15,7 +15,7 @@ interface Props {
 const Poster = ({ src, containerClass, alt, className }: Props) => {
   const imgUrl = fullImageSrc(src);
   return (
-    <div className={cn(containerClass, " rounded-[6px]")}>
+    <div className={cn(containerClass, "rounded-[6px]")}>
       <Image
         src={imgUrl}
         alt={alt}

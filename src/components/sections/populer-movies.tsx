@@ -52,10 +52,10 @@ const PopulerMovies = () => {
   // If data is still loading, show a skeleton loader
   if (isLoading) {
     content = (
-      <div className="container grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 mt-10">
+      <div className="container grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5  mt-10 gap-4 gap-y-8">
         {Array.from({ length: 10 }).map((_, index) => (
           <SkeletonWrapper isLoading={isLoading} key={index}>
-            <div className="w-[260px] h-auto rounded-[4px]"></div>
+            <div className="w-[260px] h-[340px] rounded-[4px]">fdsfs</div>
           </SkeletonWrapper>
         ))}
       </div>
@@ -87,7 +87,7 @@ const PopulerMovies = () => {
     <div>
       {content}
       <div className="mt-10 w-full flex justify-center">
-        {hasNextPage && (
+        {hasNextPage && !isLoading && !isError && (
           <button
             className="flex items-center rounded-full border border-gray-200 bg-secondary-50 px-3 py-2 text-sm font-medium dark:hover:bg-white/5 hover:bg-gray-100"
             type="button"
